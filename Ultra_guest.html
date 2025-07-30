@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technify University - Where Innovation Meets Excellence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #0a0b0f;
+      --secondary-bg: #111318;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --accent-primary: #00f5ff;
+      --accent-secondary: #7c3aed;
+      --accent-tertiary: #f59e0b;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --gradient-primary: linear-gradient(135deg, #00f5ff 0%, #7c3aed 100%);
+      --gradient-secondary: linear-gradient(135deg, #7c3aed 0%, #f59e0b 100%);
+      --gradient-accent: linear-gradient(135deg, #00f5ff 0%, #7c3aed 50%, #f59e0b 100%);
+      --shadow-glow: 0 0 40px rgba(0, 245, 255, 0.15);
+      --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
+      --blur-amount: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+
+    /* Animated background particles */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--secondary-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-primary);
+      border-radius: 4px;
+    }
+
+    /* Header with glassmorphism */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      backdrop-filter: blur(var(--blur-amount));
+      background: rgba(10, 11, 15, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--primary-bg);
+      border-radius: 10px;
+    }
+
+    .logo-icon span {
+      position: relative;
+      z-index: 1;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .cta-button {
+      background: var(--gradient-primary);
+      color: var(--primary-bg);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(0, 245, 255, 0.3);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-secondary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-button:hover::before {
+      opacity: 1;
+    }
+
+    .cta-button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero section with advanced animations */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 8rem 2rem 4rem;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+      animation: slideDown 0.8s ease-out;
+    }
+
+    .hero-badge::before {
+      content: '✨';
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: slideUp 0.8s ease-out 0.4s both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideUp 0.8s ease-out 0.6s both;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: var(--primary-bg);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 80px rgba(0, 245, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: var(--glass-bg);
+      border-color: var(--accent-primary);
+      transform: translateY(-3px);
+    }
+
+    /* Floating elements */
+    .floating-element {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .float-1 {
+      top: 20%;
+      left: 10%;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .float-2 {
+      top: 60%;
+      right: 15%;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-secondary);
+      border-radius: 30%;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite reverse;
+    }
+
+    .float-3 {
+      bottom: 20%;
+      left: 20%;
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-accent);
+      border-radius: 20%;
+      opacity: 0.08;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+      color: var(--accent-primary);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Stats section */
+    .stats {
+      background: var(--secondary-bg);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--glass-bg);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(var(--blur-amount));
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(0, 245, 255, 0.3);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .feature-icon::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--primary-bg);
+      border-radius: 14px;
+    }
+
+    .feature-icon span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .feature-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .testimonial-card {
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .testimonial-content {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--primary-bg);
+    }
+
+    .author-info h4 {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .author-info p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--secondary-bg);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cta-description {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-bg);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section ul li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero {
+        padding: 6rem 1rem 4rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      section {
+        padding: 4rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Background particles -->
+  <div class="bg-particles" id="particles"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <span>TU</span>
+        </div>
+        <div class="logo-text">Technify University</div>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#campus">Campus</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="guest.html" class="cta-button">
+          <span>Apply Now</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="floating-element float-1"></div>
+    <div class="floating-element float-2"></div>
+    <div class="floating-element float-3"></div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        Ranked #1 Innovation University 2025
+      </div>
+      <h1>Shape Tomorrow's World at Technify University</h1>
+      <p class="hero-subtitle">
+        Where cutting-edge technology meets world-class education. Join 50,000+ students 
+        building the future through innovation, research, and transformative learning experiences.
+      </p>
+      <div class="hero-buttons">
+        <a href="#programs" class="btn-primary">Explore Programs</a>
+        <a href="#tour" class="btn-secondary">Virtual Tour</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-in">
+          <span class="stat-number">50K+</span>
+          <span class="stat-label">Active Students</span>
+        </div>
+        <div class="stat-item fade-in">
+          <span class="stat-number">300+</span>
+          <span class="stat-label">Industry Partners</span>
+        </div>
+        <div class="stat-item fade-in">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">Employment Rate</span>
+        </div>
+        <div class="stat-item fade-in">
+          <span class="stat-number">150+</span>
+          <span class="stat-label">Research Labs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section id="programs">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-badge">Academic Excellence</div>
+        <h2 class="section-title">World-Class Programs</h2>
+        <p class="section-description">
+          Choose from over 200 cutting-edge programs designed to prepare you for tomorrow's challenges
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🤖</span>
+          </div>
+          <h3 class="feature-title">Artificial Intelligence & Machine Learning</h3>
+          <p class="feature-description">
+            Master the technologies shaping our future with hands-on AI/ML projects, 
+            neural networks, and real-world applications across industries.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🧬</span>
+          </div>
+          <h3 class="feature-title">Biotechnology & Life Sciences</h3>
+          <p class="feature-description">
+            Explore genetic engineering, drug discovery, and sustainable biotechnology 
+            in our state-of-the-art laboratories and research facilities.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🚀</span>
+          </div>
+          <h3 class="feature-title">Aerospace Engineering</h3>
+          <p class="feature-description">
+            Design spacecraft, develop propulsion systems, and contribute to space exploration 
+            with NASA partnerships and cutting-edge simulation technology.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>💰</span>
+          </div>
+          <h3 class="feature-title">FinTech & Digital Finance</h3>
+          <p class="feature-description">
+            Learn blockchain, cryptocurrency, algorithmic trading, and digital banking 
+            to revolutionize the financial industry.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🌱</span>
+          </div>
+          <h3 class="feature-title">Sustainable Energy Systems</h3>
+          <p class="feature-description">
+            Develop renewable energy solutions, smart grids, and sustainable technologies 
+            to combat climate change and power the future.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🎮</span>
+          </div>
+          <h3 class="feature-title">Game Development & VR/AR</h3>
+          <p class="feature-description">
+            Create immersive gaming experiences, virtual worlds, and augmented reality 
+            applications using the latest engines and technologies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section id="research">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-badge">Innovation Hub</div>
+        <h2 class="section-title">Breakthrough Research</h2>
+        <p class="section-description">
+          Our research initiatives are solving tomorrow's problems today, with $500M+ in active research funding
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🧠</span>
+          </div>
+          <h3 class="feature-title">Quantum Computing Lab</h3>
+          <p class="feature-description">
+            Pioneering quantum algorithms and hardware development with IBM and Google partnerships. 
+            Students work on real quantum computers to solve complex optimization problems.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🌍</span>
+          </div>
+          <h3 class="feature-title">Climate Change Institute</h3>
+          <p class="feature-description">
+            Developing carbon capture technologies, climate modeling systems, and sustainable 
+            solutions with $50M funding from environmental organizations.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🏥</span>
+          </div>
+          <h3 class="feature-title">Medical Innovation Center</h3>
+          <p class="feature-description">
+            Advancing precision medicine, robotic surgery, and AI-driven diagnostics. 
+            Our biomedical engineers work directly with hospitals to develop life-saving technologies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-badge">Student Success</div>
+        <h2 class="section-title">Voices of Excellence</h2>
+        <p class="section-description">
+          Hear from our graduates who are leading innovation across the globe
+        </p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-content">
+            "Technify University didn't just give me a degree—it gave me the tools to revolutionize 
+            sustainable energy. The quantum computing lab helped me develop algorithms that are now 
+            powering Tesla's next-generation batteries."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SK</div>
+            <div class="author-info">
+              <h4>Sarah Kim</h4>
+              <p>Lead Engineer, Tesla Energy</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-content">
+            "The AI program at TU is unmatched. Working with actual industry datasets and having 
+            access to cutting-edge GPUs made all the difference. I landed my dream job at OpenAI 
+            before graduation."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MR</div>
+            <div class="author-info">
+              <h4>Marcus Rodriguez</h4>
+              <p>Research Scientist, OpenAI</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-content">
+            "The biotechnology program connected me with leading pharmaceutical companies. 
+            My research on gene therapy, supported by TU's world-class facilities, is now 
+            in clinical trials helping cancer patients worldwide."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AL</div>
+            <div class="author-info">
+              <h4>Dr. Amelia Liu</h4>
+              <p>Principal Scientist, Moderna</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campus Section -->
+  <section id="campus">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-badge">Campus Life</div>
+        <h2 class="section-title">Innovation Everywhere</h2>
+        <p class="section-description">
+          Experience a campus designed for the future, where every space inspires creativity and collaboration
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🏢</span>
+          </div>
+          <h3 class="feature-title">Smart Campus Network</h3>
+          <p class="feature-description">
+            5G-enabled campus with IoT sensors, smart lighting, and AI-powered resource management. 
+            Every building adapts to optimize learning environments in real-time.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🍽️</span>
+          </div>
+          <h3 class="feature-title">Sustainable Dining</h3>
+          <p class="feature-description">
+            Vertical farms, lab-grown meat options, and zero-waste dining halls. 
+            Our culinary program partners with food tech startups to reimagine nutrition.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🏠</span>
+          </div>
+          <h3 class="feature-title">Next-Gen Housing</h3>
+          <p class="feature-description">
+            Smart dorms with voice assistants, climate control, and collaborative maker spaces. 
+            Living-learning communities organized around innovation themes and research interests.
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>🏃</span>
+          </div>
+          <h3 class="feature-title">Wellness & Recreation</h3>
+          <p class="feature-description">
+            State-of-the-art fitness centers with VR training systems, meditation pods, 
+            and biometric health monitoring to optimize student wellbeing and performance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="apply">
+    <div class="container">
+      <div class="cta-content fade-in">
+        <h2 class="cta-title">Ready to Shape the Future?</h2>
+        <p class="cta-description">
+          Join the next generation of innovators, researchers, and leaders. 
+          Your journey to extraordinary starts here.
+        </p>
+        <div class="hero-buttons">
+          <a href="#" class="btn-primary">Start Your Application</a>
+          <a href="#" class="btn-secondary">Schedule Campus Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-badge">Get in Touch</div>
+        <h2 class="section-title">Connect With Us</h2>
+        <p class="section-description">
+          Have questions? Our admissions team is here to help you navigate your path to success.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>📍</span>
+          </div>
+          <h3 class="feature-title">Visit Our Campus</h3>
+          <p class="feature-description">
+            1 Innovation Drive<br>
+            Silicon Valley, CA 94301<br>
+            Open 24/7 for virtual tours
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>📧</span>
+          </div>
+          <h3 class="feature-title">Admissions Office</h3>
+          <p class="feature-description">
+            admissions@technifyuniversity.edu<br>
+            international@technifyuniversity.edu<br>
+            Response within 24 hours
+          </p>
+        </div>
+        
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <span>📱</span>
+          </div>
+          <h3 class="feature-title">Direct Contact</h3>
+          <p class="feature-description">
+            +1 (650) 555-TECH<br>
+            WhatsApp: +1 (650) 555-0123<br>
+            Available 9 AM - 9 PM PST
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Academics</h3>
+          <ul>
+            <li><a href="#">Undergraduate Programs</a></li>
+            <li><a href="#">Graduate Programs</a></li>
+            <li><a href="#">Online Learning</a></li>
+            <li><a href="#">Research Opportunities</a></li>
+            <li><a href="#">Academic Calendar</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Admissions</h3>
+          <ul>
+            <li><a href="#">Apply Now</a></li>
+            <li><a href="#">Tuition & Aid</a></li>
+            <li><a href="#">International Students</a></li>
+            <li><a href="#">Campus Tours</a></li>
+            <li><a href="#">Admission Requirements</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Campus Life</h3>
+          <ul>
+            <li><a href="#">Housing & Dining</a></li>
+            <li><a href="#">Student Organizations</a></li>
+            <li><a href="#">Athletics & Recreation</a></li>
+            <li><a href="#">Health & Wellness</a></li>
+            <li><a href="#">Career Services</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Research</h3>
+          <ul>
+            <li><a href="#">Research Centers</a></li>
+            <li><a href="#">Faculty Research</a></li>
+            <li><a href="#">Student Research</a></li>
+            <li><a href="#">Industry Partnerships</a></li>
+            <li><a href="#">Innovation Labs</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Technify University. All rights reserved. | Privacy Policy | Terms of Use | Accessibility</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Loading animation
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading');
+      setTimeout(() => {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 500);
+      }, 1500);
+    });
+
+    // Background particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        container.appendChild(particle);
+      }
+    }
+
+    // Scroll animations
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.fade-in');
+      const windowHeight = window.innerHeight;
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Header scroll effect
+    function handleHeaderScroll() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(10, 11, 15, 0.95)';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        header.style.background = 'rgba(10, 11, 15, 0.8)';
+        header.style.boxShadow = 'none';
+      }
+    }
+
+    // Smooth scrolling for navigation links
+    function initSmoothScrolling() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    }
+
+    // Animate statistics counters
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      
+      counters.forEach(counter => {
+        const target = counter.textContent;
+        const numericValue = parseInt(target.replace(/\D/g, ''));
+        const suffix = target.replace(/[\d,]/g, '');
+        let current = 0;
+        const increment = numericValue / 100;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= numericValue) {
+            counter.textContent = numericValue.toLocaleString() + suffix;
+            clearInterval(timer);
+          } else {
+            counter.textContent = Math.floor(current).toLocaleString() + suffix;
+          }
+        }, 20);
+      });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      initSmoothScrolling();
+      handleScrollAnimations();
+      
+      // Animate counters when stats section is visible
+      const statsSection = document.querySelector('.stats');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+      observer.observe(statsSection);
+    });
+
+    // Event listeners
+    window.addEventListener('scroll', () => {
+      handleScrollAnimations();
+      handleHeaderScroll();
+    });
+
+    // Add some interactive features
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-12px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Add typing effect to hero title
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.innerHTML = '';
+      
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      
+      type();
+    }
+
+    // Initialize typing effect after loading
+    setTimeout(() => {
+      const heroTitle = document.querySelector('.hero h1');
+      const originalText = heroTitle.textContent;
+      typeWriter(heroTitle, originalText, 50);
+    }, 2000);
+  </script>
+</body>
+</html>

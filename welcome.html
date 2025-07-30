@@ -1,0 +1,81 @@
+<!-- welcome-ocean.html.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | Technify University</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e8f1f2;
+    }
+
+    .welcome {
+      background: rgba(255, 255, 255, 0.15); /* More visible */
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+      text-align: center;
+      backdrop-filter: blur(8px);
+      max-width: 600px;
+      width: 90%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .welcome:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6); /* Animate pop */
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    a {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #4dd0e1;
+      color: #0f2027;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    a:hover {
+      background: #33c5d9;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome">
+    <h1>Welcome to Technify University</h1>
+    <p>Your learning portal starts here.</p>
+    <a href="Ultra_guest.html">Login</a>
+  </div>
+  <footer>&copy; 2025 Technify University. All rights reserved.</footer>
+</body>
+</html>
